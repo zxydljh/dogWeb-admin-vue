@@ -3,7 +3,12 @@ import CommonLogo from '@/layout/Logo/index.vue'
 import {
   Document,
   Menu as IconMenu,
-  Setting
+  User,
+  House,
+  Sugar,
+  Coordinate,
+  FirstAidKit
+
 } from '@element-plus/icons-vue'
 
 const handleOpen = (key, keyPath) => {
@@ -32,45 +37,45 @@ export default {
         @close="handleClose"
         router
       >
-        <el-menu-item index="1">
+        <el-menu-item index="home">
           <el-icon>
-            <icon-menu/>
+            <House/>
           </el-icon>
           <span>数据面板</span>
         </el-menu-item>
-        <el-menu-item index="2">
+        <el-menu-item index="order">
           <el-icon>
             <icon-menu/>
           </el-icon>
           <span>订单管理</span>
         </el-menu-item>
-        <el-menu-item index="3">
+        <el-menu-item index="dog">
           <el-icon>
             <Document/>
           </el-icon>
           <span>宠物狗管理</span>
         </el-menu-item>
-        <el-menu-item index="4">
+        <el-menu-item index="drug">
           <el-icon>
-            <setting/>
+            <FirstAidKit/>
           </el-icon>
           <span>药品管理</span>
         </el-menu-item>
-        <el-menu-item index="5">
+        <el-menu-item index="toy">
           <el-icon>
-            <setting/>
+            <Coordinate/>
           </el-icon>
           <span>玩具管理</span>
         </el-menu-item>
-        <el-menu-item index="6">
+        <el-menu-item index="food">
           <el-icon>
-            <setting/>
+            <Sugar/>
           </el-icon>
           <span>食品管理</span>
         </el-menu-item>
-        <el-menu-item index="7" disabled>
+        <el-menu-item index="employee" disabled>
           <el-icon>
-            <setting/>
+            <User/>
           </el-icon>
           <span>员工管理</span>
         </el-menu-item>
