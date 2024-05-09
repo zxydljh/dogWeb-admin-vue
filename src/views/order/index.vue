@@ -1,5 +1,5 @@
 <script setup>
-
+import Upload from '@/components/upload/index.vue'
 </script>
 <script>
 export default {
@@ -8,7 +8,11 @@ export default {
 </script>
 
 <template>
- <div>OrderView</div>
+  <div>
+    <from>
+      <Upload></Upload>
+    </from>
+  </div>
 </template>
 
 <style scoped>

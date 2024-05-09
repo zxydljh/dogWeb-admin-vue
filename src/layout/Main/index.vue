@@ -19,7 +19,7 @@ export default {
 
 <style scoped>
 .app-main {
-  height: calc(100% - 60px);
-  overflow-y: auto;
+  height: 100%;
+  padding: 30px 30px 10px;
 }
 </style>

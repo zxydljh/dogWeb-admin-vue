@@ -1,5 +1,5 @@
 <script setup>
-
+import AddCommodity from '@/components/addCommodity/AddCommodity.vue'
 </script>
 <script>
 export default {
@@ -8,7 +8,7 @@ export default {
 </script>
 <template>
   <div>
-    dataView
+    <AddCommodity/>
   </div>
 </template>
 
