@@ -33,9 +33,19 @@ const routes = [
         component: () => import('@/views/employee/index.vue')
       },
       {
+        path: 'addEmployee',
+        name: 'AddEmployee',
+        component: () => import('@/views/employee/components/addEmployee.vue')
+      },
+      {
         path: 'dog',
         name: 'Dog',
         component: () => import('@/views/dog/index.vue')
+      },
+      {
+        path: 'addDog',
+        name: 'AddDog',
+        component: () => import('@/views/dog/components/addDog.vue')
       },
       {
         path: 'toy',
@@ -43,14 +53,29 @@ const routes = [
         component: () => import('@/views/toy/index.vue')
       },
       {
+        path: 'addToy',
+        name: 'AddToy',
+        component: () => import('@/views/toy/components/addToy.vue')
+      },
+      {
         path: 'food',
         name: 'Food',
         component: () => import('@/views/food/index.vue')
       },
       {
+        path: 'addFood',
+        name: 'Add|Food',
+        component: () => import('@/views/food/components/addFood.vue')
+      },
+      {
         path: 'drug',
         name: 'Drug',
         component: () => import('@/views/drug/index.vue')
+      },
+      {
+        path: 'addDrug',
+        name: 'AddDrug',
+        component: () => import('@/views/drug/components/addDrug.vue')
       }
     ]
   },

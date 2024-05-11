@@ -73,7 +73,7 @@ export default {
           </el-icon>
           <span>食品管理</span>
         </el-menu-item>
-        <el-menu-item index="employee" disabled>
+        <el-menu-item index="employee">
           <el-icon>
             <User/>
           </el-icon>

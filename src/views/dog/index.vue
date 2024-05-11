@@ -1,7 +1,10 @@
 <script setup>
 import '@/styles/commodity.css'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { Plus } from '@element-plus/icons-vue'
+
+const router = useRouter()
 
 const input = ref('')
 
@@ -51,6 +54,9 @@ const handleSizeChange = (val) => {
 const handleCurrentChange = (val) => {
   console.log(`current page: ${val}`)
 }
+const addDog = () => {
+  router.push('/addDog')
+}
 </script>
 <script>
 export default {
@@ -63,13 +69,15 @@ export default {
       宠物狗名称：
       <el-input v-model="input" style="width: 240px" placeholder="请输入宠物狗名称" class="commodity-search"/>
       <el-button type="warning">查询</el-button>
-      <el-button type="primary" :icon="Plus">添加</el-button>
+      <el-button type="primary" :icon="Plus" @click="addDog">添加</el-button>
     </div>
 
     <div>
       <el-scrollbar height="470px">
         <el-table :data="tableData" style="width: 100%">
-          <el-table-column fixed prop="name" label="名称" width="200"/>
+          <el-table-column fixed prop="name" label="名称" width="150"/>
+          <el-table-column fixed prop="name" label="品种" width="150"/>
+          <el-table-column fixed prop="name" label="性别" width="200"/>
           <el-table-column prop="img" label="图片" width="200">
             <el-image style="width: 100px; height: 100px" :src="tableData[0].img" :fit="fit"/>
           </el-table-column>

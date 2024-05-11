@@ -1,9 +1,11 @@
 <script setup>
 import '@/styles/commodity.css'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { Plus } from '@element-plus/icons-vue'
 
 const input = ref('')
+const router = useRouter()
 
 const currentPage2 = ref(1)
 const pageSize2 = ref(10)
@@ -51,6 +53,9 @@ const handleSizeChange = (val) => {
 const handleCurrentChange = (val) => {
   console.log(`current page: ${val}`)
 }
+const addToy = () => {
+  router.push('/addToy')
+}
 </script>
 <script>
 export default {
@@ -63,7 +68,7 @@ export default {
       玩具名称：
       <el-input v-model="input" style="width: 240px" placeholder="请输入玩具名称" class="commodity-search"/>
       <el-button type="warning">查询</el-button>
-      <el-button type="primary" :icon="Plus">添加</el-button>
+      <el-button type="primary" :icon="Plus" @click="addToy">添加</el-button>
     </div>
 
     <div>

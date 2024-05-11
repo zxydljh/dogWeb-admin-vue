@@ -7,7 +7,8 @@ const form = reactive({
   name: '',
   price: '',
   delivery: false,
-  desc: ''
+  desc: '',
+  dogBreed: ''
 })
 const imageUrl = ref('')
 
@@ -38,20 +39,22 @@ const beforeAvatarUpload = (file) => {
 </script>
 <script>
 export default {
-  name: 'AddCommodity'
+  name: 'AddDog'
 }
 </script>
 
 <template>
   <div class="add-commodity">
     <el-form :model="form" label-width="auto" style="max-width: 500px">
-      <el-form-item label="名称" required>
+      <el-form-item label="狗狗名称" required>
         <el-input v-model="form.name" placeholder="请输入商品名称"/>
       </el-form-item>
       <el-form-item label="价格" required>
         <el-input v-model="form.price" placeholder="请输入商品价格"/>
       </el-form-item>
-
+      <el-form-item label="品种" required>
+        <el-input v-model="form.dogBreed" placeholder="请输入品种"/>
+      </el-form-item>
       <el-form-item label="商品图片" required>
         <el-upload
           class="avatar-uploader"

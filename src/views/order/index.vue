@@ -1,5 +1,5 @@
 <script setup>
-import Upload from '@/components/upload/index.vue'
+
 </script>
 <script>
 export default {
@@ -9,9 +9,7 @@ export default {
 
 <template>
   <div>
-    <from>
-      <Upload></Upload>
-    </from>
+    order
   </div>
 </template>
 
