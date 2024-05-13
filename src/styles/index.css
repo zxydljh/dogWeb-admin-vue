@@ -30,3 +30,10 @@ a:hover {
     outline: none;
     text-decoration: none;
 }
+
+
+:root {
+    --main-color: #ecb11b;
+    --main-color-light: orange;
+    --main-bg-color: #eedeb4;
+}

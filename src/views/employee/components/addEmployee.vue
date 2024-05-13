@@ -1,15 +1,18 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive } from 'vue'
 import { ElMessage } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 
 const form = reactive({
   name: '',
-  price: '',
-  delivery: false,
-  desc: ''
+  phone: '',
+  idNumber: '',
+  sex: '',
+  resource: '',
+  status: '',
+  address: '',
+  imageUrl: ''
 })
-const imageUrl = ref('')
 
 const onSubmit = () => {
   console.log('submit!')
@@ -18,7 +21,7 @@ const onSubmit = () => {
 const handleAvatarSuccess = (res, file) => {
   console.log(res)
   console.log(file)
-  imageUrl.value = URL.createObjectURL(file.raw)
+  form.imageUrl = URL.createObjectURL(res.data)
 }
 
 const beforeAvatarUpload = (file) => {
@@ -35,6 +38,15 @@ const beforeAvatarUpload = (file) => {
     return false
   }
 }
+
+const uploadImgDel = () => {
+  form.imageUrl = ''
+}
+
+const reUploadImg = () => {
+  form.imageUrl = ''
+  this.$router.push('/api/common/upload')
+}
 </script>
 <script>
 export default {
@@ -46,32 +58,53 @@ export default {
   <div class="add-commodity">
     <el-form :model="form" label-width="auto" style="max-width: 500px">
       <el-form-item label="员工名称" required>
-        <el-input v-model="form.name" placeholder="请输入商品名称"/>
+        <el-input v-model="form.name" placeholder="请输入员工名称"/>
       </el-form-item>
-      <el-form-item label="价格" required>
-        <el-input v-model="form.price" placeholder="请输入商品价格"/>
+      <el-form-item label="电话" required>
+        <el-input v-model="form.phone" placeholder="请输入员工电话"/>
       </el-form-item>
-
-      <el-form-item label="商品图片" required>
+      <el-form-item label="身份证号" required>
+        <el-input v-model="form.idNumber" placeholder="请输入员工身份证"/>
+      </el-form-item>
+      <el-form-item label="性别" required>
+        <el-radio-group v-model="form.sex">
+          <el-radio value="1">男</el-radio>
+          <el-radio value="0">女</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      <el-form-item label="账号状态">
+        <el-switch v-model="form.status"/>
+      </el-form-item>
+      <el-form-item label="员工头像" required>
         <el-upload
           class="avatar-uploader"
-          action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+          action="/api/common/upload"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
         >
-          <img v-if="imageUrl" :src="imageUrl" class="avatar"/>
+          <img v-if="form.imageUrl" :src="form.imageUrl" class="avatar"/>
           <el-icon v-else class="avatar-uploader-icon">
             <Plus/>
           </el-icon>
         </el-upload>
+        <span v-if="form.imageUrl"
+              class="el-image-operation">
+            <span class="el-upload-span"
+                  @click.stop="uploadImgDel">
+                  删除图片
+            </span>
+            <span class="el-upload-span" @click.stop="reUploadImg"> 重新上传 </span>
+        </span>
       </el-form-item>
-
-      <el-form-item label="售卖状态">
-        <el-switch v-model="form.delivery"/>
-      </el-form-item>
-      <el-form-item label="描述">
-        <el-input v-model="form.desc" type="textarea"/>
+      <el-form-item label="家庭住址">
+        <el-input
+          v-model="form.address"
+          style="width: 240px"
+          autosize
+          type="textarea"
+          placeholder="员工家庭住址"
+        />
       </el-form-item>
       <el-form-item class="sub-btn">
         <el-button type="primary" @click="onSubmit">添加</el-button>
@@ -96,6 +129,21 @@ export default {
 .sub-btn {
   width: 150px;
   margin: auto;
+}
+
+.el-image-operation {
+  color: white;
+}
+
+.el-upload-span {
+  margin-left: 20px;
+  background-color: var(--main-color);
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.el-upload-span:hover {
+  cursor: pointer;
 }
 </style>
 
