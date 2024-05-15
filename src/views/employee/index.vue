@@ -11,9 +11,6 @@ const router = useRouter()
 const input = ref('')
 const currentPage = ref(1)
 const pageSize = ref(10)
-const small = ref(false)
-const background = ref(false)
-const disabled = ref(false)
 const dataTotal = ref(0)
 const tableData = ref([])
 
@@ -21,10 +18,12 @@ const handleClick = () => {
   console.log('click')
 }
 const handleSizeChange = (val) => {
-  console.log(`${val} items per page`)
+  pageSize.value = val
+  init()
 }
 const handleCurrentChange = (val) => {
-  console.log(`current page: ${val}`)
+  currentPage.value = val
+  init()
 }
 const addEmployee = () => {
   router.push('/addEmployee')
@@ -34,13 +33,17 @@ onMounted(() => {
   init()
 })
 
-const init = () => {
+const searchHandle = () => {
+  init()
+}
+
+const init = async () => {
   const params = {
     page: currentPage.value,
     pageSize: pageSize.value,
     name: input.value ? input.value : undefined
   }
-  getEmployeeList(params).then((res) => {
+  await getEmployeeList(params).then((res) => {
     // console.log(res.data)
     if (String(res.data.code) === '1') {
       tableData.value = res.data.data.records
@@ -61,7 +64,7 @@ export default {
     <div class="commodity-header">
       员工姓名：
       <el-input v-model="input" style="width: 240px" placeholder="请输入员工姓名" class="commodity-search"/>
-      <el-button type="warning">查询</el-button>
+      <el-button type="warning" @click="searchHandle">查询</el-button>
       <el-button type="primary" :icon="Plus" @click="addEmployee">添加</el-button>
     </div>
 
@@ -70,19 +73,32 @@ export default {
         <el-table :data="tableData" style="width: 100%;height: 100%">
           <el-table-column fixed prop="name" label="员工姓名" width="150"/>
           <el-table-column prop="avatar" label="图片" width="200">
-            <el-image style="width: 100px; height: 100px" :src="tableData[0].img" :fit="fit"/>
+            <template #default="{ row }">
+              <el-image style="width: 100px; height: 100px" :src="row.avatar" :fit="fit"/>
+            </template>
           </el-table-column>
           <el-table-column prop="phone" label="电话" width="150"/>
           <el-table-column prop="position" label="职位" width="150"/>
           <el-table-column prop="sex" label="性别" width="150"/>
           <el-table-column prop="updateTime" label="最后操作时间" width="200"/>
           <el-table-column fixed="right" label="操作" width="200">
-            <template #default>
-              <el-button link type="primary" size="small" @click="handleClick">
+            <template #default="{ row }">
+              <el-button link
+                         type="primary"
+                         size="small"
+                         @click="handleClick"
+                         :disabled="row.name === 'admin'"
+              >
                 编辑
               </el-button>
-              <el-button link type="primary" size="small">修改</el-button>
-              <el-button link type="danger" size="small">启用</el-button>
+              <el-button link
+                         type="danger"
+                         size="small"
+                         :disabled="row.name === 'admin'"
+                         :class="{ 'is-orange': row.status === 0 }"
+              >
+                {{ row.status === 1 ? '禁用' : '启用' }}
+              </el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -106,5 +122,7 @@ export default {
 </template>
 
 <style scoped>
-
+.is-orange {
+  color: orange;
+}
 </style>
