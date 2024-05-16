@@ -1,5 +1,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
+import { store } from '@/store'
+
 const dialogFormVisible = ref(false)
 
 const formLabelWidth = '140px'
@@ -10,6 +12,10 @@ const form = reactive({
   confirmPassword: ''
 })
 
+const logout = () => {
+  store.dispatch('user/logout')
+  location.reload()
+}
 </script>
 <script>
 export default {
@@ -25,7 +31,7 @@ export default {
         </span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item :icon="SwitchButton">
+          <el-dropdown-item :icon="SwitchButton" @click="logout">
             退出登录
           </el-dropdown-item>
           <el-dropdown-item :icon="Setting"  @click="dialogFormVisible = true">
