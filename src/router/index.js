@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/',
     component: CommonLayout,
-    redirect: '/login',
+    redirect: '/home',
     children: [
       {
         path: 'home',

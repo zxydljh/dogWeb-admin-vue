@@ -2,7 +2,7 @@ import { login, logout } from '@/api/employee'
 import { ElMessage } from 'element-plus'
 
 const state = {
-  token: '',
+  token: localStorage.getItem('authToken') || '',
   id: '',
   name: '',
   avatar: '',
@@ -32,9 +32,12 @@ const actions = {
     return await login(userInfo)
       .then((res) => {
         const data = res.data
-        console.log(data)
+        // console.log(data)
         if (data.code === 1) {
           commit('SET_TOKEN', data.data.token)
+          localStorage.setItem('authToken', data.data.token)
+          // console.log('login:' + state.token)
+
           commit('SET_ID', data.data.id)
           commit('SET_NAME', data.data.name)
           commit('SET_AVATAR', data.data.avatar)
