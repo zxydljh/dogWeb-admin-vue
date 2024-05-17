@@ -7,11 +7,10 @@ export const login = (userInfo) =>
     data: userInfo
   })
 
-export const logout = (params) =>
+export const logout = () =>
   request({
     url: '/employee/logout',
-    method: 'post',
-    params
+    method: 'post'
   })
 
 export const getEmployeeList = (params) =>

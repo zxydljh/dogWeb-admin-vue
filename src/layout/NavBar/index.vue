@@ -1,6 +1,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
-import { store } from '@/store'
+import store from '@/store'
+import router from '@/router'
 
 const dialogFormVisible = ref(false)
 
@@ -14,7 +15,7 @@ const form = reactive({
 
 const logout = () => {
   store.dispatch('user/logout')
-  location.reload()
+  router.push('/login')
 }
 </script>
 <script>

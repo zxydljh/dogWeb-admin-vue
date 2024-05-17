@@ -50,18 +50,23 @@ const actions = {
       })
   },
   async logout ({ commit }) {
-    try {
-      await logout({})
-      commit('SET_TOKEN', '')
-      commit('SET_ID', '')
-      commit('SET_NAME', '')
-      commit('SET_AVATAR', '')
-      commit('SET_ROLES', [])
-      return true
-    } catch (error) {
-      ElMessage.error('退出失败：' + error)
-      return false
-    }
+    return await logout()
+      .then(res => {
+        const data = res.data
+        if (data.code === 1) {
+          commit('SET_TOKEN', '')
+          localStorage.removeItem('authToken')
+
+          commit('SET_ID', '')
+          commit('SET_NAME', '')
+          commit('SET_AVATAR', '')
+          commit('SET_ROLES', [])
+          return true
+        } else {
+          ElMessage.error('admin 退出失败')
+          return false
+        }
+      })
   }
 }
 export default {
