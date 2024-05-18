@@ -19,3 +19,16 @@ export const getEmployeeList = (params) =>
     method: 'get',
     params
   })
+
+export const addEmployee = (data) =>
+  request({
+    url: '/employee/add',
+    method: 'post',
+    data
+  })
+
+export const getEmployeeDetail = (id) =>
+  request({
+    url: `/employee/${id}`,
+    method: 'get'
+  })

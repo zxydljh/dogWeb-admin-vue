@@ -2,20 +2,43 @@
 import { reactive } from 'vue'
 import { ElMessage } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
+import { addEmployee } from '@/api/employee'
 
 const form = reactive({
   name: '',
   phone: '',
   idNumber: '',
   sex: '',
-  resource: '',
-  status: '',
+  position: '',
+  status: false,
   address: '',
   imageUrl: ''
 })
 
-const onSubmit = () => {
-  console.log('submit!')
+const onSubmit = async () => {
+  console.log(form)
+  addEmployee(form)
+    .then(res => {
+      const data = res.data
+      if (data.code === 1) {
+        ElMessage.success('成功保存信息')
+        form.name = ''
+        form.phone = ''
+        form.idNumber = ''
+        form.sex = ''
+        form.position = ''
+        form.status = false
+        form.address = ''
+        form.imageUrl = ''
+        return true
+      } else {
+        ElMessage.error('保存信息失败')
+        return false
+      }
+    })
+    .catch((err) => {
+      console.log('添加失败：' + err)
+    })
 }
 
 const headers = {
@@ -87,6 +110,9 @@ export default {
           <el-radio value="1">男</el-radio>
           <el-radio value="0">女</el-radio>
         </el-radio-group>
+      </el-form-item>
+      <el-form-item label="职位">
+        <el-input v-model="form.position" placeholder="请输入员工职位"/>
       </el-form-item>
       <el-form-item label="账号状态">
         <el-switch v-model="form.status"/>

@@ -79,7 +79,11 @@ export default {
           </el-table-column>
           <el-table-column prop="phone" label="电话" width="150"/>
           <el-table-column prop="position" label="职位" width="150"/>
-          <el-table-column prop="sex" label="性别" width="150"/>
+          <el-table-column prop="sex" label="性别" width="150">
+            <template #default="{ row }">
+              {{ row.sex === 1 ? '男' : '女' }}
+            </template>
+          </el-table-column>
           <el-table-column prop="updateTime" label="最后操作时间" width="200"/>
           <el-table-column fixed="right" label="操作" width="200">
             <template #default="{ row }">
