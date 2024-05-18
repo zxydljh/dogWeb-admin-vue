@@ -39,3 +39,10 @@ export const updateEmployee = (id, data) =>
     method: 'put',
     data
   })
+
+export const startOrDisableEmployee = (id, status) =>
+  request({
+    url: `/employee/status/${id}`,
+    method: 'put',
+    data: { status }
+  })

@@ -3,7 +3,7 @@ import '@/styles/commodity.css'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { Plus } from '@element-plus/icons-vue'
-import { getEmployeeList } from '@/api/employee'
+import { getEmployeeList, startOrDisableEmployee } from '@/api/employee'
 import { ElMessage } from 'element-plus'
 
 const router = useRouter()
@@ -61,6 +61,21 @@ const formatDate = (date) => {
   const dateArr = dateStr.split(',')
   return `${dateArr[0]}-${dateArr[1]}-${dateArr[2]} ${dateArr[3]}:${dateArr[4]}:${dateArr[5]}`
 }
+
+const startOrDisable = (row) => {
+  startOrDisableEmployee(row.id, row.status === 1 ? 0 : 1)
+    .then((res) => {
+      if (res.data.code === 1) {
+        ElMessage.success('操作成功')
+        init()
+      } else {
+        ElMessage.error('操作失败')
+      }
+    })
+    .catch((error) => {
+      ElMessage.error('操作失败' + error)
+    })
+}
 </script>
 <script>
 export default {
@@ -85,7 +100,7 @@ export default {
               <el-image style="width: 100px; height: 100px" :src="row.avatar" :fit="fit"/>
             </template>
           </el-table-column>
-          <el-table-column prop="phone" label="电话" width="150"/>
+          <el-table-column prop="phone" label="电话" width="200"/>
           <el-table-column prop="position" label="职位" width="150"/>
           <el-table-column prop="sex" label="性别" width="150">
             <template #default="{ row }">
@@ -112,6 +127,7 @@ export default {
                          size="small"
                          :disabled="row.name === 'admin'"
                          :class="{ 'is-orange': row.status === 0 }"
+                         @click="startOrDisable(row)"
               >
                 {{ row.status === 1 ? '禁用' : '启用' }}
               </el-button>
