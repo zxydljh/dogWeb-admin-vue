@@ -53,6 +53,14 @@ const init = async () => {
     ElMessage.error('请求失败' + error)
   })
 }
+
+// 将返回的数据2024,5,18,16,23,20 转换为2024-5-18 16:23:20
+const formatDate = (date) => {
+  const dateStr = String(date)
+  // 将，换成-
+  const dateArr = dateStr.split(',')
+  return `${dateArr[0]}-${dateArr[1]}-${dateArr[2]} ${dateArr[3]}:${dateArr[4]}:${dateArr[5]}`
+}
 </script>
 <script>
 export default {
@@ -84,7 +92,11 @@ export default {
               {{ row.sex === 1 ? '男' : '女' }}
             </template>
           </el-table-column>
-          <el-table-column prop="updateTime" label="最后操作时间" width="200"/>
+          <el-table-column prop="updateTime" label="最后操作时间" width="200">
+            <template #default="{ row }">
+              {{ formatDate(row.updateTime) }}
+            </template>
+          </el-table-column>
           <el-table-column fixed="right" label="操作" width="200">
             <template #default="{ row }">
               <el-button link
