@@ -18,10 +18,21 @@ const onSubmit = () => {
   console.log('submit!')
 }
 
+const headers = {
+  authToken: localStorage.getItem('authToken')
+}
+
 const handleAvatarSuccess = (res, file) => {
-  console.log(res)
-  console.log(file)
-  form.imageUrl = URL.createObjectURL(res.data)
+  // console.log('res-----')
+  // console.log(res)
+  // console.log('file-----')
+  // console.log(file)
+  if (res.code === 1) {
+    // 将aliOss的图片地址赋值给form
+    form.imageUrl = res.data
+  } else {
+    ElMessage.error(res.msg)
+  }
 }
 
 const beforeAvatarUpload = (file) => {
@@ -37,6 +48,12 @@ const beforeAvatarUpload = (file) => {
     ElMessage.error('上传头像图片大小不能超过 2MB!')
     return false
   }
+
+  // console.log(file)
+  // 预览用户即将上传的图片
+  form.imageUrl = URL.createObjectURL(file)
+
+  return true
 }
 
 const uploadImgDel = () => {
@@ -45,7 +62,6 @@ const uploadImgDel = () => {
 
 const reUploadImg = () => {
   form.imageUrl = ''
-  this.$router.push('/api/common/upload')
 }
 </script>
 <script>
@@ -78,7 +94,8 @@ export default {
       <el-form-item label="员工头像" required>
         <el-upload
           class="avatar-uploader"
-          action="/api/common/upload"
+          action="/api/admin/common/upload"
+          :headers="headers"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
