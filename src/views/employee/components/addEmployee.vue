@@ -1,8 +1,11 @@
 <script setup>
-import { reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
-import { addEmployee } from '@/api/employee'
+import { addEmployee, getEmployeeById, updateEmployee } from '@/api/employee'
+
+const route = useRoute()
 
 const form = reactive({
   name: '',
@@ -15,30 +18,46 @@ const form = reactive({
   imageUrl: ''
 })
 
+const isEditMode = ref(false)
+
 const onSubmit = async () => {
-  console.log(form)
-  addEmployee(form)
-    .then(res => {
-      const data = res.data
-      if (data.code === 1) {
-        ElMessage.success('成功保存信息')
-        form.name = ''
-        form.phone = ''
-        form.idNumber = ''
-        form.sex = ''
-        form.position = ''
-        form.status = false
-        form.address = ''
-        form.imageUrl = ''
-        return true
+  // console.log(form)
+  if (isEditMode.value) {
+    // 更新员工信息
+    try {
+      const response = await updateEmployee(route.params.id, form)
+      if (response.data.code === 1) {
+        ElMessage.success('员工信息更新成功')
       } else {
-        ElMessage.error('保存信息失败')
-        return false
+        ElMessage.error('更新员工信息失败')
       }
-    })
-    .catch((err) => {
-      console.log('添加失败：' + err)
-    })
+    } catch (error) {
+      ElMessage.error('更新员工信息失败，请稍后再试。')
+    }
+  } else {
+    addEmployee(form)
+      .then(res => {
+        const data = res.data
+        if (data.code === 1) {
+          ElMessage.success('成功保存信息')
+          form.name = ''
+          form.phone = ''
+          form.idNumber = ''
+          form.sex = ''
+          form.position = ''
+          form.status = false
+          form.address = ''
+          form.imageUrl = ''
+          return true
+        } else {
+          ElMessage.error('保存信息失败')
+          return false
+        }
+      })
+      .catch((err) => {
+        console.log('保存失败：' + err)
+      })
+  }
 }
 
 const headers = {
@@ -86,6 +105,34 @@ const uploadImgDel = () => {
 const reUploadImg = () => {
   form.imageUrl = ''
 }
+
+// 获取员工详情并初始化表单数据
+const fetchEmployeeDetails = async (id) => {
+  try {
+    const response = await getEmployeeById(id)
+    if (response.data.code === 1) {
+      // 将一个或多个源对象的所有可枚举属性复制到目标对象
+      Object.assign(form, response.data.data)
+      // 根据后端返回的值来设置性别，转换为字符串类型
+      form.sex = String(response.data.data.sex)
+      form.status = response.data.data.status === 1
+      form.imageUrl = response.data.data.avatar
+    } else {
+      ElMessage.error(response.data.msg)
+    }
+  } catch (error) {
+    ElMessage.error('获取员工详情失败，请稍后再试。')
+  }
+}
+
+// 当路由参数存在时，获取员工详情
+onMounted(() => {
+  if (route.params.id) {
+    console.log(route.params.id)
+    isEditMode.value = true
+    fetchEmployeeDetails(route.params.id)
+  }
+})
 </script>
 <script>
 export default {
@@ -150,7 +197,7 @@ export default {
         />
       </el-form-item>
       <el-form-item class="sub-btn">
-        <el-button type="primary" @click="onSubmit">添加</el-button>
+        <el-button type="primary" @click="onSubmit">保存</el-button>
         <el-button @click="() => $router.back()">取消</el-button>
       </el-form-item>
     </el-form>

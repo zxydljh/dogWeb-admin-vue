@@ -27,8 +27,15 @@ export const addEmployee = (data) =>
     data
   })
 
-export const getEmployeeDetail = (id) =>
+export const getEmployeeById = (id) =>
   request({
     url: `/employee/${id}`,
     method: 'get'
+  })
+
+export const updateEmployee = (id, data) =>
+  request({
+    url: `/employee/update/${id}`,
+    method: 'put',
+    data
   })

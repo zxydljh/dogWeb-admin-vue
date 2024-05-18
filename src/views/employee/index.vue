@@ -14,8 +14,8 @@ const pageSize = ref(10)
 const dataTotal = ref(0)
 const tableData = ref([])
 
-const handleClick = () => {
-  console.log('click')
+const handleClick = (row) => {
+  router.push({ name: 'EditEmployee', params: { id: row.id } })
 }
 const handleSizeChange = (val) => {
   pageSize.value = val
@@ -102,7 +102,7 @@ export default {
               <el-button link
                          type="primary"
                          size="small"
-                         @click="handleClick"
+                         @click="handleClick(row)"
                          :disabled="row.name === 'admin'"
               >
                 编辑

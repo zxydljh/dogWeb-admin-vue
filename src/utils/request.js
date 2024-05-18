@@ -16,7 +16,7 @@ service.interceptors.request.use(
 
     // 配置token
     const authToken = localStorage.getItem('authToken')
-    console.log('token' + authToken)
+    // console.log('token' + authToken)
     if (authToken) {
       config.headers.authToken = authToken
     }

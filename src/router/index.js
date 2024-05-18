@@ -38,6 +38,12 @@ const routes = [
         component: () => import('@/views/employee/components/addEmployee.vue')
       },
       {
+        path: 'editEmployee/:id',
+        name: 'EditEmployee',
+        component: () => import('@/views/employee/components/addEmployee.vue'),
+        props: true
+      },
+      {
         path: 'dog',
         name: 'Dog',
         component: () => import('@/views/dog/index.vue')
@@ -64,7 +70,7 @@ const routes = [
       },
       {
         path: 'addFood',
-        name: 'Add|Food',
+        name: 'AddFood',
         component: () => import('@/views/food/components/addFood.vue')
       },
       {
