@@ -4,8 +4,8 @@ import { ElMessage } from 'element-plus'
 const state = {
   token: localStorage.getItem('authToken') || '',
   id: '',
-  name: '',
-  avatar: '',
+  name: localStorage.getItem('name') || '',
+  avatar: localStorage.getItem('avatar') || '',
   roles: []
 }
 
@@ -40,7 +40,9 @@ const actions = {
 
           commit('SET_ID', data.data.id)
           commit('SET_NAME', data.data.name)
+          localStorage.setItem('name', data.data.name)
           commit('SET_AVATAR', data.data.avatar)
+          localStorage.setItem('avatar', data.data.avatar)
           commit('SET_ROLES', data.data.roles)
           return true
         } else {
