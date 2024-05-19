@@ -64,6 +64,12 @@ const routes = [
         component: () => import('@/views/toy/components/addToy.vue')
       },
       {
+        path: 'editToy/:id',
+        name: 'EditToy',
+        component: () => import('@/views/toy/components/addToy.vue'),
+        props: true
+      },
+      {
         path: 'food',
         name: 'Food',
         component: () => import('@/views/food/index.vue')

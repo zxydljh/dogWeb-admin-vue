@@ -4,7 +4,8 @@ import router from '@/router'
 import { getRequestKey, removePending, checkPending, pending } from './requestOptimize'
 
 const service = axios.create({
-  baseURL: 'http://localhost:8080/admin', timeout: 100000
+  baseURL: 'http://localhost:8080/admin',
+  timeout: 100000
 })
 
 // 请求拦截器：在发送请求之前进行处理
