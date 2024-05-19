@@ -46,3 +46,10 @@ export const startOrDisableEmployee = (id, status) =>
     method: 'put',
     data: { status }
   })
+
+export const updateEmployeePassword = (id, data) =>
+  request({
+    url: `/employee/updatePassword/${id}`,
+    method: 'put',
+    data
+  })

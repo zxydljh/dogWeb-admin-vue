@@ -1,4 +1,4 @@
-import { login, logout } from '@/api/employee'
+import { login, logout, updateEmployeePassword } from '@/api/employee'
 import { ElMessage } from 'element-plus'
 
 const state = {
@@ -44,7 +44,7 @@ const actions = {
           commit('SET_ROLES', data.data.roles)
           return true
         } else {
-          ElMessage.error('admin 登录失败：' + data.msg)
+          ElMessage.error('登录失败：' + data.msg)
           return false
         }
       })
@@ -63,7 +63,20 @@ const actions = {
           commit('SET_ROLES', [])
           return true
         } else {
-          ElMessage.error('admin 退出失败')
+          ElMessage.error('退出失败')
+          return false
+        }
+      })
+  },
+  async updatePassword ({ commit }, userInfo) {
+    return await updateEmployeePassword(state.id, userInfo)
+      .then(res => {
+        const data = res.data
+        if (data.code === 1) {
+          ElMessage.success('密码修改成功')
+          return true
+        } else {
+          ElMessage.error('密码修改失败：' + data.msg)
           return false
         }
       })

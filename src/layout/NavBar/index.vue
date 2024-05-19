@@ -1,11 +1,15 @@
 <script setup>
-import { reactive, ref } from 'vue'
-import store from '@/store'
+import { computed, reactive, ref } from 'vue'
+import { useStore } from 'vuex'
 import router from '@/router'
+import { SwitchButton, Setting, ArrowDown } from '@element-plus/icons-vue'
+
+const store = useStore()
 
 const dialogFormVisible = ref(false)
-
 const formLabelWidth = '140px'
+
+const user = computed(() => store.state.user)
 
 const form = reactive({
   originalPassword: '',
@@ -13,9 +17,19 @@ const form = reactive({
   confirmPassword: ''
 })
 
-const logout = () => {
-  store.dispatch('user/logout')
-  router.push('/login')
+const logout = async () => {
+  await store.dispatch('user/logout')
+  router.push({ name: 'Login' })
+}
+
+const updatePassword = async () => {
+  await store.dispatch('user/updatePassword', form)
+  closeDialog()
+}
+
+// 关闭对话框
+const closeDialog = () => {
+  dialogFormVisible.value = false
 }
 </script>
 <script>
@@ -28,7 +42,9 @@ export default {
   <div class="userList">
     <el-dropdown>
         <span class="el-dropdown-link">
-           管理员<el-icon class="el-icon--right"><arrow-down/></el-icon>
+          <img class="user-avatar" :src="user.avatar" />
+           {{ user.name }}
+          <el-icon class="el-icon--right"><arrow-down/></el-icon>
         </span>
       <template #dropdown>
         <el-dropdown-menu>
@@ -57,7 +73,7 @@ export default {
       <template #footer>
         <div class="dialog-footer">
           <el-button @click="closeDialog">取消</el-button>
-          <el-button type="warning" @click="dialogFormVisible = false">
+          <el-button type="warning" @click="updatePassword">
             确定
           </el-button>
         </div>
@@ -90,5 +106,12 @@ export default {
 .el-dropdown-link {
   display: flex;
   align-items: center;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 </style>

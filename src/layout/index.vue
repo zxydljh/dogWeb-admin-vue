@@ -54,6 +54,7 @@ el-container {
 
 .el-header{
   background-color: orange;
+  --el-header-height: 80px !important;
 }
 
 el-main {
