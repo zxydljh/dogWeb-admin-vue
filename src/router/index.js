@@ -74,6 +74,12 @@ const routes = [
         component: () => import('@/views/food/components/addFood.vue')
       },
       {
+        path: 'editFood/:id',
+        name: 'EditFood',
+        component: () => import('@/views/food/components/addFood.vue'),
+        props: true
+      },
+      {
         path: 'drug',
         name: 'Drug',
         component: () => import('@/views/drug/index.vue')
