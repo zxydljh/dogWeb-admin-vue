@@ -94,6 +94,12 @@ const routes = [
         path: 'addDrug',
         name: 'AddDrug',
         component: () => import('@/views/drug/components/addDrug.vue')
+      },
+      {
+        path: 'editDrug/:id',
+        name: 'EditDrug',
+        component: () => import('@/views/drug/components/addDrug.vue'),
+        props: true
       }
     ]
   },
