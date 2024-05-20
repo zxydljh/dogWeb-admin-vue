@@ -234,8 +234,8 @@ const refundOrder = async (order) => {
 
 const orderDetail = (row) => {
   // 处理订单详情
-  console.log('订单详情', row)
-  router.push('/orderDetail')
+  // console.log('订单详情', row)
+  router.push({ name: 'OrderDetail', params: { id: row.id } })
 }
 
 const cancel = (row) => {
