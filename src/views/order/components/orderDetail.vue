@@ -39,7 +39,7 @@ export default {
 </script>
 
 <template>
-  <el-button type="primary" :icon="Back" @click="$router.go(-1)">返回</el-button>
+  <el-button type="primary" :icon="Back" @click="$router.push('/order')">返回</el-button>
   <el-descriptions
     class="margin-top"
     title="订单详情"

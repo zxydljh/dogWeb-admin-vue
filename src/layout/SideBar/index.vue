@@ -8,15 +8,7 @@ import {
   Sugar,
   Coordinate,
   FirstAidKit
-
 } from '@element-plus/icons-vue'
-
-const handleOpen = (key, keyPath) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key, keyPath) => {
-  console.log(key, keyPath)
-}
 </script>
 <script>
 export default {
@@ -33,47 +25,45 @@ export default {
         class="el-menu-vertical-demo"
         default-active="1"
         text-color="#fff"
-        @open="handleOpen"
-        @close="handleClose"
         router
       >
-        <el-menu-item index="home">
+        <el-menu-item index="/home">
           <el-icon>
             <House/>
           </el-icon>
           <span>数据面板</span>
         </el-menu-item>
-        <el-menu-item index="order">
+        <el-menu-item index="/order">
           <el-icon>
             <icon-menu/>
           </el-icon>
           <span>订单管理</span>
         </el-menu-item>
-        <el-menu-item index="dog">
+        <el-menu-item index="/dog">
           <el-icon>
             <Document/>
           </el-icon>
           <span>宠物狗管理</span>
         </el-menu-item>
-        <el-menu-item index="drug">
+        <el-menu-item index="/drug">
           <el-icon>
             <FirstAidKit/>
           </el-icon>
           <span>药品管理</span>
         </el-menu-item>
-        <el-menu-item index="toy">
+        <el-menu-item index="/toy">
           <el-icon>
             <Coordinate/>
           </el-icon>
           <span>玩具管理</span>
         </el-menu-item>
-        <el-menu-item index="food">
+        <el-menu-item index="/food">
           <el-icon>
             <Sugar/>
           </el-icon>
           <span>食品管理</span>
         </el-menu-item>
-        <el-menu-item index="employee">
+        <el-menu-item index="/employee">
           <el-icon>
             <User/>
           </el-icon>

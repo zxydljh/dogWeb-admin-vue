@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import {
   getOrderList,
   acceptOrderById,
@@ -43,14 +43,18 @@ const fetchOrders = async () => {
     endDate: endDate.value ? endDate.value : ''
   }
   // console.log(params)
-  try {
-    const response = await getOrderList(params)
-    // console.log(response)
-    tableData.value = response.data.data.records
-    dataTotal.value = response.data.data.total
-  } catch (error) {
-    ElMessage.error('获取订单失败')
-  }
+  await getOrderList(params)
+    .then(res => {
+      if (res.data.code === 1) {
+        tableData.value = res.data.data.records
+        dataTotal.value = res.data.data.total
+      } else {
+        ElMessage.error(res.data.msg)
+      }
+    })
+    .catch(err => {
+      ElMessage.error(err.message)
+    })
 }
 
 // 处理标签点击事件 订单状态 1待付款 2待接单 3已接单 4派送中 5已完成 6已取消 7退款
@@ -87,11 +91,6 @@ const handleClick = (tab, event) => {
 
 // 初始化获取所有订单
 fetchOrders()
-
-// 监听分页和页面大小的变化
-watch([currentPage, pageSize], () => {
-  fetchOrders()
-})
 
 const formatDate = (date) => {
   const dateStr = String(date)
