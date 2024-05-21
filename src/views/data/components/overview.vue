@@ -1,14 +1,44 @@
 <script setup>
-import { ref } from 'vue'
-import { useTransition } from '@vueuse/core'
+import { onMounted, reactive } from 'vue'
 import { ChatLineRound } from '@element-plus/icons-vue'
 import CurrentDate from '@/components/currentDate/index.vue'
+import { getStatisticsData } from '@/api/data'
 
-const source = ref(0)
-const outputValue = useTransition(source, {
-  duration: 1500
+const data = reactive({
+  turnover: 0.0,
+  validOrder: 0,
+  orderFillRate: 0.0,
+  manNumber: 0,
+  femaleNumber: 0,
+  feedbackNumber: 0
 })
-source.value = 68
+
+const initData = () => {
+  getStatisticsData()
+    .then((res) => {
+      const resData = res.data
+      console.log(resData)
+      if (resData.code === 1) {
+        data.turnover = resData.data.turnover
+        data.validOrder = resData.data.validOrder
+        data.orderFillRate = resData.data.orderFillRate
+        data.manNumber = resData.data.manNumber
+        data.femaleNumber = resData.data.femaleNumber
+        data.feedbackNumber = resData.data.feedbackNumber
+      } else {
+        console.log('获取数据失败:' + resData.msg)
+      }
+    })
+    .catch((error) => {
+      console.error('数据请求错误:', error)
+    })
+}
+
+// 页面渲染初始化数据
+onMounted(() => {
+  initData()
+})
+
 </script>
 <script>
 export default {
@@ -19,12 +49,12 @@ export default {
 <template>
   <div class="view-container">
     <div class="view-name">
-      今日数据
+      统计数据
       <CurrentDate/>
     </div>
     <el-row>
       <el-col :span="5">
-        <el-statistic :value="268500">
+        <el-statistic :value="data.turnover" precision="2">
           <template #title>
             <div style=" display: inline-flex; align-items: center" class="view-title">
               营业额
@@ -34,7 +64,7 @@ export default {
         </el-statistic>
       </el-col>
       <el-col :span="5">
-        <el-statistic :value="2500">
+        <el-statistic :value="data.validOrder">
           <template #title>
             <div style=" display: inline-flex; align-items: center" class="view-title">
               有效订单
@@ -43,7 +73,7 @@ export default {
         </el-statistic>
       </el-col>
       <el-col :span="5">
-        <el-statistic :value="outputValue">
+        <el-statistic :value="data.orderFillRate" precision="2">
           <template #title>
             <div style="display: inline-flex; align-items: center" class="view-title">
               订单完成率(%)
@@ -52,17 +82,17 @@ export default {
         </el-statistic>
       </el-col>
       <el-col :span="5">
-        <el-statistic :value="138">
+        <el-statistic :value="data.manNumber">
           <template #title>
             <div style="display: inline-flex; align-items: center" class="view-title">
               男女比例
             </div>
           </template>
-          <template #suffix>/100</template>
+          <template #suffix>/{{ data.femaleNumber }}</template>
         </el-statistic>
       </el-col>
       <el-col :span="4">
-        <el-statistic :value="562">
+        <el-statistic :value="data.feedbackNumber">
           <template #title>
             <div style="display: inline-flex; align-items: center" class="view-title">
               反馈数量
