@@ -7,3 +7,11 @@ export const getStatisticsData = () =>
       method: 'get'
     }
   )
+
+export const getOrderStatisticsData = () =>
+  request(
+    {
+      url: '/data/orderStatistics',
+      method: 'get'
+    }
+  )

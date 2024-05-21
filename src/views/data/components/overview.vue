@@ -17,7 +17,7 @@ const initData = () => {
   getStatisticsData()
     .then((res) => {
       const resData = res.data
-      console.log(resData)
+      // console.log(resData)
       if (resData.code === 1) {
         data.turnover = resData.data.turnover
         data.validOrder = resData.data.validOrder
