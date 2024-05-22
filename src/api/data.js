@@ -15,3 +15,11 @@ export const getOrderStatisticsData = () =>
       method: 'get'
     }
   )
+
+export const getGoodsStatisticsData = () =>
+  request(
+    {
+      url: '/data/goodsStatistics',
+      method: 'get'
+    }
+  )

@@ -42,7 +42,7 @@ export default {
 </script>
 
 <template>
-  <div class="view-container">
+  <div class="view-container" style="width: 100%">
     <div class="view-name">
       订单管理
       <CurrentDate/>

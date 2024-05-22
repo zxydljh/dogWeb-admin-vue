@@ -1,11 +1,8 @@
 <script setup>
 import OverView from '@/views/data/components/overview.vue'
 import OrderView from '@/views/data/components/orderview.vue'
-import DogDataView from '@/views/data/components/dogview.vue'
-import DrugDataView from '@/views/data/components/drugview.vue'
-import FoodDataView from '@/views/data/components/foodview.vue'
-import ToyDataView from '@/views/data/components/toyview.vue'
 import OrderList from '@/views/data/components/orderList.vue'
+import GoodsView from '@/views/data/components/goodsview.vue'
 </script>
 <script>
 export default {
@@ -18,12 +15,7 @@ export default {
     <OrderView/>
 
     <!--  商品数据总览  -->
-    <div class="commodity-view-container">
-      <DogDataView/>
-      <DrugDataView/>
-      <FoodDataView/>
-      <ToyDataView/>
-    </div>
+    <GoodsView/>
 
     <!--  订单列表  -->
     <OrderList/>
@@ -43,7 +35,6 @@ export default {
 
 .view-container {
   margin-bottom: 60px;
-  width: 1100px;
   background-color: #f1f1f1;
 }
 
@@ -54,12 +45,5 @@ export default {
 
 .view-title {
   font-size: 18px;
-}
-
-.commodity-view-container {
-  width: 1100px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 </style>
