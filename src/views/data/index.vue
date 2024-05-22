@@ -1,7 +1,7 @@
 <script setup>
 import OverView from '@/views/data/components/overview.vue'
 import OrderView from '@/views/data/components/orderview.vue'
-import OrderList from '@/views/data/components/orderList.vue'
+import DataChartView from '@/views/data/components/dataChartView.vue'
 import GoodsView from '@/views/data/components/goodsview.vue'
 </script>
 <script>
@@ -17,8 +17,8 @@ export default {
     <!--  商品数据总览  -->
     <GoodsView/>
 
-    <!--  订单列表  -->
-    <OrderList/>
+    <!--  图表数据总览  -->
+    <DataChartView/>
   </div>
 </template>
 

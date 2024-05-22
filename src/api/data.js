@@ -23,3 +23,12 @@ export const getGoodsStatisticsData = () =>
       method: 'get'
     }
   )
+
+export const getStatisticsDataByTime = (data) =>
+  request(
+    {
+      url: '/data/statisticsDataByTime',
+      method: 'post',
+      data
+    }
+  )
