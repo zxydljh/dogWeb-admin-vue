@@ -84,6 +84,11 @@ service.interceptors.response.use(
     return response
   },
   error => {
+    // 处理网络错误
+    if (error.request.timeout >= 100000) {
+      router.push('/404')
+      error.message = '请求超时'
+    }
     // 请求完成，删除请求中状态
     if (error.config) {
       const key = getRequestKey(error.config)

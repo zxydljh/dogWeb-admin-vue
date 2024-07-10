@@ -14,14 +14,18 @@ const form = reactive({
 const store = useStore()
 
 const submitForm = async () => {
-  // console.log(form)
-  const data = await store.dispatch('user/login', form)
-  // console.log('login index:' + data)
-  if (data === true) {
-    ElMessage.success('登录成功')
-    await router.push('/home')
-  } else {
-    ElMessage.error('登录失败')
+  try {
+    // console.log(form)
+    const data = await store.dispatch('user/login', form)
+    // console.log('login index:' + data)
+    if (data === true) {
+      ElMessage.success('登录成功')
+      await router.push('/home')
+    } else {
+      ElMessage.error('登录失败')
+    }
+  } catch (e) {
+    ElMessage.error(e.message)
   }
 }
 
