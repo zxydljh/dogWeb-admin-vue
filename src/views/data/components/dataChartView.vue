@@ -21,38 +21,53 @@ const fetchChartData = async () => {
   }
 
   const [startTime, endTime] = dateRange.value
-  const res = await getStatisticsDataByTime({ beginTime: startTime.toISOString(), endTime: endTime.toISOString() })
-  if (res.data.code === 1) {
-    const { userGrowthTrend, turnoverData } = res.data.data
-    updateUserTrendChart(userGrowthTrend)
-    updateTurnoverChart(turnoverData)
-  } else {
-    ElMessage.error(res.data.message)
+  try {
+    const res = await getStatisticsDataByTime({ beginTime: startTime.toISOString(), endTime: endTime.toISOString() })
+
+    if (res && res.data && res.data.code === 1) {
+      const { userGrowthTrend, turnoverData } = res.data.data
+      updateUserTrendChart(userGrowthTrend)
+      updateTurnoverChart(turnoverData)
+    } else {
+      ElMessage.error(res.data ? res.data.message : '请求失败，未返回数据')
+    }
+  } catch (err) {
+    ElMessage.error(err.message || '请求失败')
   }
 }
 
 const updateUserTrendChart = (data) => {
-  const dates = data.map(item => item.date)
-  const userCounts = data.map(item => item.newUserCount)
-  userTrendChart.setOption({
-    title: { text: '用户增长趋势' },
-    tooltip: {},
-    xAxis: { data: dates },
-    yAxis: {},
-    series: [{ type: 'line', data: userCounts }]
-  })
+  // console.log(data)
+  // 判断数据是否为空，如果为空则不更新图表，避免报错
+  if (data) {
+    const dates = data.map(item => item.date)
+    const userCounts = data.map(item => item.newUserCount)
+    userTrendChart.setOption({
+      title: { text: '用户增长趋势' },
+      tooltip: {},
+      xAxis: { data: dates },
+      yAxis: {},
+      series: [{ type: 'line', data: userCounts }]
+    })
+  } else {
+    ElMessage.error('获取用户增长趋势数据失败')
+  }
 }
 
 const updateTurnoverChart = (data) => {
-  const dates = data.map(item => item.date)
-  const turnovers = data.map(item => item.turnover)
-  last7DaysTurnoverChart.setOption({
-    title: { text: '营业额收益' },
-    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-    xAxis: { data: dates },
-    yAxis: {},
-    series: [{ type: 'bar', data: turnovers }]
-  })
+  if (data) {
+    const dates = data.map(item => item.date)
+    const turnovers = data.map(item => item.turnover)
+    last7DaysTurnoverChart.setOption({
+      title: { text: '营业额收益' },
+      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+      xAxis: { data: dates },
+      yAxis: {},
+      series: [{ type: 'bar', data: turnovers }]
+    })
+  } else {
+    ElMessage.error('获取营业额收益数据失败')
+  }
 }
 </script>
 <script>
