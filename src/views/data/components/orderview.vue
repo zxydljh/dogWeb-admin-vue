@@ -25,11 +25,11 @@ const init = async () => {
         data.canceledOrder = resData.data.canceledOrder
         data.totalOrder = resData.data.totalOrder
       } else {
-        ElMessage.error(resData.msg)
+        ElMessage.error(resData.msg ? resData.msg : '订单统计请求失败！')
       }
     })
-    .catch(err => {
-      ElMessage.error('请求出错：' + err)
+    .catch(() => {
+      ElMessage.error('请求出错！')
     })
 }
 

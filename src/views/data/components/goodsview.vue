@@ -28,11 +28,11 @@ getGoodsStatisticsData()
       goodsData.toyStart = data.data.toyStartCommunity
       goodsData.toyStop = data.data.toyStopCommunity
     } else {
-      ElMessage.error(data.msg)
+      ElMessage.error(data.msg ? data.msg : '商品统计信息获取失败！')
     }
   })
-  .catch(err => {
-    ElMessage.error('商品统计信息获取失败！' + err)
+  .catch(() => {
+    ElMessage.error('商品统计信息获取失败！')
   })
 </script>
 <script>

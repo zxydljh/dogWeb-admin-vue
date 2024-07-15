@@ -3,6 +3,7 @@ import { onMounted, reactive } from 'vue'
 import { ChatLineRound } from '@element-plus/icons-vue'
 import CurrentDate from '@/components/currentDate/index.vue'
 import { getStatisticsData } from '@/api/data'
+import { ElMessage } from 'element-plus'
 
 const data = reactive({
   turnover: 0.0,
@@ -26,11 +27,11 @@ const initData = () => {
         data.femaleNumber = resData.data.femaleNumber
         data.feedbackNumber = resData.data.feedbackNumber
       } else {
-        console.log('获取数据失败:' + resData.msg)
+        ElMessage.error(resData.msg ? resData.msg : '数据统计请求错误！')
       }
     })
-    .catch((error) => {
-      console.error('数据请求错误:', error)
+    .catch(() => {
+      ElMessage.error('数据请求错误')
     })
 }
 
