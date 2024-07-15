@@ -13,6 +13,11 @@ const routes = [
     component: () => import('@/views/404.vue')
   },
   {
+    path: '/500',
+    name: '500',
+    component: () => import('@/views/500.vue')
+  },
+  {
     path: '/',
     component: CommonLayout,
     redirect: '/home',

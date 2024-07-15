@@ -86,7 +86,7 @@ service.interceptors.response.use(
   error => {
     // 处理网络错误
     if (error.request.timeout >= 100000) {
-      router.push('/404')
+      router.push('/500')
       error.message = '请求超时'
     }
     // 请求完成，删除请求中状态
