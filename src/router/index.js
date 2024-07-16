@@ -48,6 +48,7 @@ const routes = [
         name: 'AddEmployee',
         component: () => import('@/views/employee/components/addEmployee.vue')
       },
+      // 编辑员工 跳转到 addEmployee组件中，但是要传递id
       {
         path: 'editEmployee/:id',
         name: 'EditEmployee',
@@ -117,6 +118,11 @@ const routes = [
         name: 'EditDrug',
         component: () => import('@/views/drug/components/addDrug.vue'),
         props: true
+      },
+      {
+        path: 'feedback',
+        name: 'Feedback',
+        component: () => import('@/views/feedback/index.vue')
       }
     ]
   },

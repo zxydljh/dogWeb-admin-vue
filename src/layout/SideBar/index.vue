@@ -7,7 +7,8 @@ import {
   House,
   Sugar,
   Coordinate,
-  FirstAidKit
+  FirstAidKit,
+  ChatLineRound
 } from '@element-plus/icons-vue'
 </script>
 <script>
@@ -68,6 +69,12 @@ export default {
             <User/>
           </el-icon>
           <span>员工管理</span>
+        </el-menu-item>
+        <el-menu-item index="/feedback">
+          <el-icon>
+            <ChatLineRound/>
+          </el-icon>
+          <span>用户反馈</span>
         </el-menu-item>
       </el-menu>
     </el-col>
