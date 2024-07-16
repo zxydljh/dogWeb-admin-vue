@@ -10,6 +10,20 @@ import {
   FirstAidKit,
   ChatLineRound
 } from '@element-plus/icons-vue'
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+// 获取当前路由信息
+const route = useRoute()
+const activeIndex = ref(route.path)
+
+// 监听路由变化并更新activeIndex
+watch(
+  () => route.path,
+  (newPath) => {
+    activeIndex.value = newPath
+  }
+)
 </script>
 <script>
 export default {
@@ -24,7 +38,7 @@ export default {
         active-text-color="#ffd04b"
         background-color="#545c64"
         class="el-menu-vertical-demo"
-        default-active="1"
+        :default-active=activeIndex
         text-color="#fff"
         router
       >
