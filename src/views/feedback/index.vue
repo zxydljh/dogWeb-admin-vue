@@ -1,13 +1,12 @@
 <template>
-  <div class="feedback-container">
-    <div class="feedback-header">
+  <div class="commodity-container">
+    <div class="commodity-header">
       反馈主题：
       <el-input v-model="input" style="width: 240px" placeholder="请输入反馈主题" class="feedback-search"/>
       <el-button type="warning" @click="searchHandle">查询</el-button>
-      <el-button type="primary" :icon="Plus" @click="addFeedback">添加</el-button>
     </div>
 
-    <div class="feedback-list">
+    <div class="commodity-list">
       <el-scrollbar height="470px">
         <el-table :data="tableData" style="width: 100%;height: 100%">
           <el-table-column prop="userName" label="用户名" width="150"/>
@@ -45,9 +44,9 @@
 </template>
 
 <script setup>
+import '@/styles/commodity.css'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { Plus } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import { getFeedbackList, deleteFeedbackById } from '@/api/feedback'
 
@@ -67,10 +66,6 @@ const handleSizeChange = (val) => {
 const handleCurrentChange = (val) => {
   currentPage.value = val
   init()
-}
-
-const addFeedback = () => {
-  router.push('/addFeedback')
 }
 
 onMounted(() => {
