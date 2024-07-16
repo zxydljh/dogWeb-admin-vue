@@ -20,7 +20,7 @@ const routes = [
   {
     path: '/',
     component: CommonLayout,
-    redirect: '/home',
+    redirect: '/order',
     children: [
       {
         path: 'home',
