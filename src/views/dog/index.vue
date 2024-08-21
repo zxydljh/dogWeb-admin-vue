@@ -43,7 +43,7 @@ const init = async () => {
     name: input.value ? input.value : undefined
   }
   await getDogList(params).then((res) => {
-    console.log(res.data)
+    // console.log(res.data)
     if (String(res.data.code) === '1') {
       tableData.value = res.data.data.records
       dataTotal.value = res.data.data.total

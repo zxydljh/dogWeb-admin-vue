@@ -239,7 +239,7 @@ const orderDetail = (row) => {
 
 const cancel = (row) => {
   // 处理取消订单
-  console.log('取消订单', row)
+  // console.log('取消订单', row)
   cancelOrder(row)
 }
 </script>

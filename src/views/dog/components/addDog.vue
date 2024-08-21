@@ -38,7 +38,7 @@ const fetchDogDetails = async (id) => {
 // 当路由参数存在时，获取宠物狗详情
 onMounted(() => {
   if (route.params.id) {
-    console.log(route.params.id)
+    // console.log(route.params.id)
     isEditMode.value = true
     fetchDogDetails(route.params.id)
   }
@@ -61,7 +61,7 @@ const onSubmit = () => {
     // 添加数据
     addDog(form)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         ElMessage.success('添加成功')
         form.name = ''
         form.price = ''

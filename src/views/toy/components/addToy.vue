@@ -37,7 +37,7 @@ const fetchToyDetails = async (id) => {
 // 当路由参数存在时，获取员工详情
 onMounted(() => {
   if (route.params.id) {
-    console.log(route.params.id)
+    // console.log(route.params.id)
     isEditMode.value = true
     fetchToyDetails(route.params.id)
   }
@@ -60,7 +60,7 @@ const onSubmit = () => {
     // 添加食品数据
     addToy(form)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         ElMessage.success('添加成功')
         form.name = ''
         form.price = ''

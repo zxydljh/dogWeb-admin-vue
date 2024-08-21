@@ -55,7 +55,7 @@ const onSubmit = async () => {
         }
       })
       .catch((err) => {
-        console.log('保存失败：' + err)
+        ElMessage.error('保存失败：' + err)
       })
   }
 }
@@ -128,7 +128,7 @@ const fetchEmployeeDetails = async (id) => {
 // 当路由参数存在时，获取员工详情
 onMounted(() => {
   if (route.params.id) {
-    console.log(route.params.id)
+    // console.log(route.params.id)
     isEditMode.value = true
     fetchEmployeeDetails(route.params.id)
   }
