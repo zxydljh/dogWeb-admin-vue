@@ -4,7 +4,7 @@ import router from '@/router'
 import { getRequestKey, removePending, checkPending, pending } from './requestOptimize'
 
 const service = axios.create({
-  baseURL: 'http://localhost:8080/admin',
+  baseURL: process.env.VUE_APP_API_URL,
   timeout: 100000
 })
 
