@@ -19,14 +19,15 @@ getGoodsStatisticsData()
     const { data } = res
     // console.log(data)
     if (data.code === 1) {
-      goodsData.dogStart = data.data.dogStartCommunity
-      goodsData.dogStop = data.data.dogStopCommunity
-      goodsData.drugStart = data.data.drugStartCommunity
-      goodsData.drugStop = data.data.drugStopCommunity
-      goodsData.foodStart = data.data.foodStartCommunity
-      goodsData.foodStop = data.data.foodStopCommunity
-      goodsData.toyStart = data.data.toyStartCommunity
-      goodsData.toyStop = data.data.toyStopCommunity
+      // 处理为空的情况
+      goodsData.dogStart = data.data.dogStartCommunity ? data.data.dogStartCommunity : 0
+      goodsData.dogStop = data.data.dogStopCommunity ? data.data.dogStopCommunity : 0
+      goodsData.drugStart = data.data.drugStartCommunity ? data.data.drugStartCommunity : 0
+      goodsData.drugStop = data.data.drugStopCommunity ? data.data.drugStopCommunity : 0
+      goodsData.foodStart = data.data.foodStartCommunity ? data.data.foodStartCommunity : 0
+      goodsData.foodStop = data.data.foodStopCommunity ? data.data.foodStopCommunity : 0
+      goodsData.toyStart = data.data.toyStartCommunity ? data.data.toyStartCommunity : 0
+      goodsData.toyStop = data.data.toyStopCommunity ? data.data.toyStopCommunity : 0
     } else {
       ElMessage.error(data.msg ? data.msg : '商品统计信息获取失败！')
     }

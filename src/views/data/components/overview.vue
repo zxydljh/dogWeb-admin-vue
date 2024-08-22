@@ -20,12 +20,13 @@ const initData = () => {
       const resData = res.data
       // console.log(resData)
       if (resData.code === 1) {
-        data.turnover = resData.data.turnover
-        data.validOrder = resData.data.validOrder
-        data.orderFillRate = resData.data.orderFillRate
-        data.manNumber = resData.data.manNumber
-        data.femaleNumber = resData.data.femaleNumber
-        data.feedbackNumber = resData.data.feedbackNumber
+        // fix 处理为空的情况
+        data.turnover = resData.data.turnover ? resData.data.turnover.toFixed(2) : 0.00
+        data.validOrder = resData.data.validOrder ? resData.data.validOrder : 0
+        data.orderFillRate = resData.data.orderFillRate ? resData.data.orderFillRate.toFixed(2) : 0.00
+        data.manNumber = resData.data.manNumber ? resData.data.manNumber : 0
+        data.femaleNumber = resData.data.femaleNumber ? resData.data.femaleNumber : 0
+        data.feedbackNumber = resData.data.feedbackNumber ? resData.data.feedbackNumber : 0
       } else {
         ElMessage.error(resData.msg ? resData.msg : '数据统计请求错误！')
       }

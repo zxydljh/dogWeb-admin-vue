@@ -18,12 +18,13 @@ const init = async () => {
     .then(res => {
       const resData = res.data
       if (resData.code === 1) {
-        data.waitingAcceptOrder = resData.data.waitingAcceptOrder
-        data.waitingDeliveryOrder = resData.data.waitingDeliveryOrder
-        data.deliveringOrder = resData.data.deliveringOrder
-        data.completedOrder = resData.data.completedOrder
-        data.canceledOrder = resData.data.canceledOrder
-        data.totalOrder = resData.data.totalOrder
+        // fix 处理为空的情况
+        data.waitingAcceptOrder = resData.data.waitingAcceptOrder ? resData.data.waitingAcceptOrder : 0
+        data.waitingDeliveryOrder = resData.data.waitingDeliveryOrder ? resData.data.waitingDeliveryOrder : 0
+        data.deliveringOrder = resData.data.deliveringOrder ? resData.data.deliveringOrder : 0
+        data.completedOrder = resData.data.completedOrder ? resData.data.completedOrder : 0
+        data.canceledOrder = resData.data.canceledOrder ? resData.data.canceledOrder : 0
+        data.totalOrder = resData.data.totalOrder ? resData.data.totalOrder : 0
       } else {
         ElMessage.error(resData.msg ? resData.msg : '订单统计请求失败！')
       }
