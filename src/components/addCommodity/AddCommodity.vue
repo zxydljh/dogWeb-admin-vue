@@ -12,12 +12,13 @@ const form = reactive({
 const imageUrl = ref('')
 
 const onSubmit = () => {
-  console.log('submit!')
+  // console.log('submit!')
+  ElMessage.success('添加成功')
 }
 
 const handleAvatarSuccess = (res, file) => {
-  console.log(res)
-  console.log(file)
+  // console.log(res)
+  // console.log(file)
   imageUrl.value = URL.createObjectURL(file.raw)
 }
 

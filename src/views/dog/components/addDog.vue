@@ -131,7 +131,7 @@ export default {
       <el-form-item label="商品图片" required>
         <el-upload
           class="avatar-uploader"
-          action="/api/admin/common/upload"
+          action="/admin/common/upload"
           :headers="headers"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"

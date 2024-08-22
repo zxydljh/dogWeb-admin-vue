@@ -167,7 +167,7 @@ export default {
       <el-form-item label="员工头像" required>
         <el-upload
           class="avatar-uploader"
-          action="/api/admin/common/upload"
+          action="/admin/common/upload"
           :headers="headers"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
