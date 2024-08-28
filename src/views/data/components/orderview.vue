@@ -19,6 +19,10 @@ const init = async () => {
       const resData = res.data
       if (resData.code === 1) {
         // fix 处理为空的情况
+        if (resData.data === null) {
+          return
+        }
+
         data.waitingAcceptOrder = resData.data.waitingAcceptOrder ? resData.data.waitingAcceptOrder : 0
         data.waitingDeliveryOrder = resData.data.waitingDeliveryOrder ? resData.data.waitingDeliveryOrder : 0
         data.deliveringOrder = resData.data.deliveringOrder ? resData.data.deliveringOrder : 0

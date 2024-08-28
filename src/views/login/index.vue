@@ -7,8 +7,8 @@ import { useStore } from 'vuex'
 const router = useRouter()
 
 const form = reactive({
-  phone: '123456',
-  password: 'likl'
+  phone: '',
+  password: ''
 })
 
 const store = useStore()

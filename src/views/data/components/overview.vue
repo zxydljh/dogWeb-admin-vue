@@ -21,6 +21,9 @@ const initData = () => {
       // console.log(resData)
       if (resData.code === 1) {
         // fix 处理为空的情况
+        if (resData.data === null) {
+          return
+        }
         data.turnover = resData.data.turnover ? resData.data.turnover.toFixed(2) : 0.00
         data.validOrder = resData.data.validOrder ? resData.data.validOrder : 0
         data.orderFillRate = resData.data.orderFillRate ? resData.data.orderFillRate.toFixed(2) : 0.00
