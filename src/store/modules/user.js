@@ -3,7 +3,7 @@ import { ElMessage } from 'element-plus'
 
 const state = {
   token: localStorage.getItem('authToken') || '',
-  id: '',
+  id: localStorage.getItem('id') || '',
   name: localStorage.getItem('name') || '',
   avatar: localStorage.getItem('avatar') || '',
   roles: []
@@ -39,6 +39,7 @@ const actions = {
           // console.log('login:' + state.token)
 
           commit('SET_ID', data.data.id)
+          localStorage.setItem('id', data.data.id)
           commit('SET_NAME', data.data.name)
           localStorage.setItem('name', data.data.name)
           commit('SET_AVATAR', data.data.avatar)

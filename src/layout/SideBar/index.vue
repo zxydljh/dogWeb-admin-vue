@@ -8,7 +8,8 @@ import {
   Sugar,
   Coordinate,
   FirstAidKit,
-  ChatLineRound
+  ChatLineRound,
+  Bell
 } from '@element-plus/icons-vue'
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
@@ -83,6 +84,12 @@ export default {
             <User/>
           </el-icon>
           <span>员工管理</span>
+        </el-menu-item>
+        <el-menu-item index="/announcement">
+          <el-icon>
+            <Bell/>
+          </el-icon>
+          <span>发布公告</span>
         </el-menu-item>
         <el-menu-item index="/feedback">
           <el-icon>

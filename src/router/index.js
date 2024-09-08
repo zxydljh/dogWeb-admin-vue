@@ -123,6 +123,11 @@ const routes = [
         path: 'feedback',
         name: 'Feedback',
         component: () => import('@/views/feedback/index.vue')
+      },
+      {
+        path: 'announcement',
+        name: 'Announcement',
+        component: () => import('@/views/announcement/index.vue')
       }
     ]
   },
